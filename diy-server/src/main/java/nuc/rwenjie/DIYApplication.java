@@ -20,6 +20,8 @@ import java.util.Date;
 @MapperScan("nuc.rwenjie.modules.sys.mapper")
 public class DIYApplication {
     public static void main(String[] args) {
+
+        //测试 git GitHub
         SpringApplication.run(DIYApplication.class, args);
         Date dNow = new Date( );
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
