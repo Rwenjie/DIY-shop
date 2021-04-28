@@ -6,6 +6,7 @@
 
     <modules>
         <module>diy-server</module>
+        <module>diy-generator</module>
     </modules>
 
     <parent>
