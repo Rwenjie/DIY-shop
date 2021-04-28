@@ -2,3 +2,5 @@
 .idea/workspace.xml
 DIY.iml
 diy-workshop.iml
+target
+.gitignore
