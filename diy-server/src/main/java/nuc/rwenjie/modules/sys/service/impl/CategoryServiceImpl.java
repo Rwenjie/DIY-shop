@@ -1,5 +1,6 @@
 package nuc.rwenjie.modules.sys.service.impl;
 
+import nuc.rwenjie.common.utils.SpringBeanFactoryUtils;
 import nuc.rwenjie.modules.sys.dataobject.CategoryDO;
 import nuc.rwenjie.modules.sys.mapper.CategoryMapper;
 import nuc.rwenjie.modules.sys.service.CategoryService;

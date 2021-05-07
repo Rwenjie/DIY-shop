@@ -47,13 +47,10 @@ public class UserModel implements Serializable, UserDetails {
     private String mobile;
 
     @ApiModelProperty(value = "用户状态")
-    private String status;
+    private int status;
 
     @ApiModelProperty(value = "创建时间")
     private String createdAt;
-
-    @ApiModelProperty(value = "更新时间")
-    private String updatedAt;
 
     @ApiModelProperty(value = "头像URL")
     private String profileUrl;
@@ -80,6 +77,6 @@ public class UserModel implements Serializable, UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

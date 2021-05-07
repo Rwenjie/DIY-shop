@@ -41,7 +41,7 @@ public class UserDO implements Serializable, UserDetails {
     @NotBlank(message = "手机号不能为空")
     private String mobile;
 
-    private String status;
+    private int status;
 
     private String createdAt;
 

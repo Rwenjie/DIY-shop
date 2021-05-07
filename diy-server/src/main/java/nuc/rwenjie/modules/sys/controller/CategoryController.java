@@ -42,8 +42,6 @@ public class CategoryController extends BaseController {
     @GetMapping("/listing")
     public RespBean selectAll() {
         List<CategoryModel> categoryModelList = categoryService.selectAll();
-
-
         return RespBean.success("获取成功", categoryModelList);
     }
     private void findSubCategory(List<CategoryVO> categoryVOList, List<CategoryModel> categoryModelList) {

@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import nuc.rwenjie.common.config.jwt.JwtTokenUtil;
 import nuc.rwenjie.common.config.security.DefaultUserDetailsService;
 import nuc.rwenjie.common.utils.RespBean;
+import nuc.rwenjie.common.utils.ali.phoneVerify.service.SMSService;
+import nuc.rwenjie.common.utils.ali.phoneVerify.util.SMSUtil;
 import nuc.rwenjie.modules.sys.mapper.UserMapper;
 import nuc.rwenjie.modules.sys.service.LoginService;
 import nuc.rwenjie.modules.sys.service.model.UserModel;
@@ -36,7 +38,8 @@ public class LoginServiceImpl implements LoginService {
     JwtTokenUtil jwtTokenUtil;
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    @Autowired
+    SMSService smsService;
 
     @Value("${jwt.tokenHead}")
     private String tokenHead;
@@ -44,15 +47,14 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public RespBean login(String username, String password) {
 
-        System.out.println("LoginServiceImpl=>用户登录"+username);
         UserModel user = userDetailsService.loadUserByUsername(username);
 
-  /*      if (null==user||!passwordEncoder.matches(password, user.getPassword())) {
+        if (null==user||!passwordEncoder.matches(password, user.getPassword())) {
             return RespBean.error("用户名或密码不正确");
         }
-        if (!user.isEnabled()) {
+        if (user.getStatus()!=1) {
             return RespBean.error("账号被禁用,请联系管理员!");
-        }*/
+        }
 
         //更新security登录对象
         UsernamePasswordAuthenticationToken authenticationToken = new
@@ -83,6 +85,16 @@ public class LoginServiceImpl implements LoginService {
          System.out.println("LoginServiceImpl=>短信验证码:mobile:"+mobile);
          UserModel user = userDetailsService.loadUserByUsername(mobile);
 
+         if (null==user) {
+             return RespBean.error("用户名不存在");
+         }
+         if (user.getStatus()!=1) {
+             return RespBean.error("账号被禁用,请联系管理员!");
+         }
+         String res = smsService.verifyCode(mobile, smsCode);
+         if (!res.equals(SMSUtil.CaptchaOk)){
+             return RespBean.error(res);
+         }
         //更新security登录对象
          UsernamePasswordAuthenticationToken authenticationToken = new
                  UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

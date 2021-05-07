@@ -64,7 +64,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/**",        // 放行 swagger 资源
                 "/v2/api-docs/**",              // 放行 swagger 资源
                 "/ws/**",
-                "/login/**"
+                "/login/**",
+                "/register/**",
+                "/captcha/**",
+                "/w/**"
         );
     }
 

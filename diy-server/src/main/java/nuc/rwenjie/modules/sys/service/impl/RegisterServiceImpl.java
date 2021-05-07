@@ -6,6 +6,7 @@ import nuc.rwenjie.modules.sys.mapper.RegisterMapper;
 import nuc.rwenjie.modules.sys.service.AsyncService;
 import nuc.rwenjie.modules.sys.service.RegisterService;
 import nuc.rwenjie.modules.sys.service.model.UserModel;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,14 +36,15 @@ public class RegisterServiceImpl implements RegisterService {
     AsyncService asyncService;
 
     @Override
-    public String userRegister(UserModel userModel){
+    public int userRegister(UserModel userModel){
 
-        UserDO userDO = new UserDO();
         System.out.println("开始用户注册");
         //唯一id
-        String id = UUID.randomUUID().toString();
-        userDO.setId(id);
+        //id 数据库自动生产
+        /*String id = UUID.randomUUID().toString();
+        userDO.setId(id);*/
         //密码加密
+        System.out.println("未加密=====》"+userModel.getPassword());
         String password = passwordEncoder.encode(userModel.getPassword());
 
         //用户注册时间
@@ -50,18 +52,16 @@ public class RegisterServiceImpl implements RegisterService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateStr = format.format(date);
         System.out.println(dateStr);
-
+        UserDO userDO = convertFromModel(userModel);
 
         userDO.setCreatedAt(dateStr);
         userDO.setUpdatedAt(dateStr);
+        userDO.setProfileUrl("https://rwenjie-blog.oss-cn-hangzhou.aliyuncs.com/diy-shop/default%20avatar.png");
         userDO.setEncrptPassword(password);
 
-        registerMapper.insert(userDO);
-        System.out.println("用户注册完成"+userDO);
-
-        return "用户完成注册";
+       int row =  registerMapper.insert(userDO);
+        return row;
     }
-
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -81,5 +81,19 @@ public class RegisterServiceImpl implements RegisterService {
         return userNum;
     }
 
+    /**
+     *  UserModel转换成 UserDO
+     * @Param: userDO
+     * @return nuc.rwenjie.modules.sys.service.model.UserModel
+     **/
+    private UserDO convertFromModel(UserModel userModel) {
+        if (userModel == null) {
+            return null;
+        }
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(userModel, userDO);
+        userDO.setEncrptPassword(userModel.getPassword());
+        return userDO;
+    }
 }
 

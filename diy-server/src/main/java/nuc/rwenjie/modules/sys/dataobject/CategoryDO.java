@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import nuc.rwenjie.modules.sys.service.model.CategoryModel;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,9 @@ import java.util.List;
 @TableName(value = "tb_category")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CategoryDO {
+public class CategoryDO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId("id")

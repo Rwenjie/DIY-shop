@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "CategoryModel", description = "商品分类")
-public class CategoryModel {
+public class CategoryModel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id")
     @TableId("id")

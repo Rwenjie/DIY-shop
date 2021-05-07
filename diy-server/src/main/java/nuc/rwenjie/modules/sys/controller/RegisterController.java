@@ -32,8 +32,12 @@ public class RegisterController {
     @ApiOperation(value = "用户注册")
     @PostMapping("/submit")
     public RespBean userRegister(UserModel user){
-        //registerService.userRegister(user)
-        return RespBean.success(null);
+        System.out.println(user);
+        int result = registerService.userRegister(user);
+        if (result==0){
+            return RespBean.error(500, "注册失败");
+        }
+        return RespBean.success("注册成功");
     }
 
     @ApiOperation(value = "检查手机号是否被注册")

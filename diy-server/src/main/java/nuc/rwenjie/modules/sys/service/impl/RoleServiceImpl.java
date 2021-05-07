@@ -3,7 +3,9 @@ package nuc.rwenjie.modules.sys.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import nuc.rwenjie.common.utils.SpringBeanFactoryUtils;
 import nuc.rwenjie.modules.sys.dataobject.RoleDO;
+import nuc.rwenjie.modules.sys.dataobject.SpecificationDO;
 import nuc.rwenjie.modules.sys.mapper.RoleMapper;
+import nuc.rwenjie.modules.sys.mapper.SpecificationMapper;
 import nuc.rwenjie.modules.sys.service.RoleService;
 import nuc.rwenjie.modules.sys.service.model.RoleModel;
 import org.springframework.beans.BeanUtils;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Service;
  **/
 
 @Service
-public class SysRoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
     @Autowired
     RoleMapper roleMapper;

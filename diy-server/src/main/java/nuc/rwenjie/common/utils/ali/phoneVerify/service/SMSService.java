@@ -1,5 +1,14 @@
 package nuc.rwenjie.common.utils.ali.phoneVerify.service;
 
+import com.aliyuncs.CommonRequest;
+import com.aliyuncs.CommonResponse;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.exceptions.ServerException;
+import com.aliyuncs.http.MethodType;
+import com.aliyuncs.profile.DefaultProfile;
+import com.google.gson.Gson;
 import nuc.rwenjie.common.constant.RedisConstant;
 import nuc.rwenjie.common.utils.RedisOperator;
 import nuc.rwenjie.common.utils.ali.phoneVerify.component.PhoneRandomBuilder;
@@ -68,7 +77,7 @@ public class SMSService {
         String[] params = {code};
         System.out.println("SMSService=>已经为用户"+phone+"发送了验证码："+code);
 
- /*       DefaultProfile profile = DefaultProfile.getProfile("cn-qingdao", accessKeyId, accessKeySecret);
+        DefaultProfile profile = DefaultProfile.getProfile("cn-qingdao", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
@@ -92,11 +101,9 @@ public class SMSService {
             System.out.println(response.getData());
             //将请求结果String转换为一个对象
             return new Gson().fromJson(response.getData(), SMSResponse.class);
-        } catch (ServerException e) {
-            e.printStackTrace();
         } catch (ClientException e) {
             e.printStackTrace();
-        }*/
+        }
         return null;
     }
 

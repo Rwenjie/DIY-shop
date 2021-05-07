@@ -39,12 +39,6 @@ public class LoginController extends BaseController{
         return RespBean.success("注销成功！");
     }
 
-    @ApiOperation(value = "测试")
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello";
-    }
-
     @ApiOperation(value = "短信验证码登录")
     @PostMapping("/login/sms")
     public RespBean smsLogin(String mobile, String smsCode, HttpServletRequest request) throws BusinessException {
@@ -56,7 +50,5 @@ public class LoginController extends BaseController{
     public RespBean mobileLogin(String mobile, String password, HttpServletRequest request) throws BusinessException {
         return loginService.login(mobile, password);
     }
-
-
 
 }

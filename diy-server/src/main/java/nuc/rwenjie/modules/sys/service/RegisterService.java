@@ -12,7 +12,7 @@ import nuc.rwenjie.modules.sys.service.model.UserModel;
 
 public interface RegisterService {
 
-    String userRegister(UserModel user);
+    int userRegister(UserModel user);
 
     int findByPhone(String phone);
 
