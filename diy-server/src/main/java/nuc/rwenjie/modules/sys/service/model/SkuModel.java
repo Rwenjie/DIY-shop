@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -30,11 +31,8 @@ public class SkuModel implements Serializable {
     @ApiModelProperty(value = "sku id")
     private Long id;
 
-    @ApiModelProperty(value = "spu id")
-    private Long spuId;
-
-    @ApiModelProperty(value = "规格名称")
-    private String name;
+    @ApiModelProperty(value = "goodsId")
+    private Long goodsId;
 
     @ApiModelProperty(value = "商品标题")
     private String title;
@@ -48,11 +46,14 @@ public class SkuModel implements Serializable {
     @ApiModelProperty(value = "库存数量")
     private Integer stock;
 
-    @ApiModelProperty(value = "sku的特有规格参数，json格式，反序列化时应使用linkedHashMap，保证有序，等价于spu的spec_templat字段")
+    @ApiModelProperty(value = "sku的特有规格参数，json格式")
     private String ownSpec;
 
     @ApiModelProperty(value = "是否有效，0无效，1有效")
     private Integer enable;
+
+    @ApiModelProperty(value = "选项")
+    private List<String> options;
 
     @ApiModelProperty(value = "添加时间")
     private LocalDateTime createTime;
@@ -60,5 +61,20 @@ public class SkuModel implements Serializable {
     @ApiModelProperty(value = "最后修改时间")
     private LocalDateTime updateTime;
 
-
+    @Override
+    public String toString() {
+        return "SkuModel{" +
+                "id=" + id +
+                ", goodsId=" + goodsId +
+                ", title='" + title + '\'' +
+                ", images='" + images + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", ownSpec='" + ownSpec + '\'' +
+                ", enable=" + enable +
+                ", options=" + options +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

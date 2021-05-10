@@ -81,8 +81,8 @@ rwenjie:
 
 # 阿里云短信验证账号信息
 SMS:
-  accessKeyId: LTAI4GF8DpWaXyfAPTBPR7Hn #访问阿里云API的验证
-  accessKeySecret: YLoI0kSx5QqmDiRmCzLtLbGKmh6WBY #访问阿里云API的验证
+  accessKeyId:  #访问阿里云API的验证
+  accessKeySecret:  #访问阿里云API的验证
   product: Dysmsapi #阿里云云通信短信
   domain: dysmsapi.aliyuncs.com #产品域名
   signName: RwenjieBlog #签名
